@@ -1,0 +1,351 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: Arial;
+    /* Naya Classy Blue Gradient */
+    background: linear-gradient(to right, #141e30, #243b55);
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+}
+
+input, textarea {
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+}
+
+textarea {
+    height: 100px;
+}
+
+/* --- BUTTONS: Purana style, Classy Blue Color --- */
+button, .custom-file-upload {
+    padding: 12px 25px;
+    background: linear-gradient(to right, #2c5364, #203a43);
+    border: none;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+button:hover, .custom-file-upload:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #243b55, #141e30);
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+th {
+    background: #243b55; /* Dark blue header */
+    color: white;
+}
+
+td, th {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+ul li {
+    background: #f0f4f8;
+    margin: 5px;
+    padding: 8px;
+}
+
+
+
+
+.banner {
+    width: 100%;          
+    height: auto;         
+    border-radius: 12px;
+    margin: 0 auto 25px auto;
+    display: block;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+}
+
+
+/* ABOUT */
+.about {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+
+/* FEATURES */
+.features {
+    margin-top: 30px;
+}
+
+.feature-box {
+    display: inline-block;
+    background: #2c5364; /* Matching dark color */
+    color: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* HERO SECTION (Background body se match hoga) */
+.hero {
+    margin: 0;
+    padding: 20px 20px;
+    background: transparent; 
+    color: white;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.main-text { font-size: 20px; }
+.sub-text { font-size: 16px; }
+
+/* DELETE BUTTON */
+.delete-style {
+    padding: 10px 18px;
+    font-size: 14px;
+    background: linear-gradient(to right, #2c5364, #203a43); 
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.delete-style:hover {
+    background: linear-gradient(to right, #ff4d4d, #ff0000); /* Only hover pe red */
+    transform: scale(1.05);
+}
+
+.file-error {
+    display: none;
+    color: #ff4d4d;
+    font-size: 12px;
+}
+
+/* =========================================
+   NEW CLASSY COLORS FOR RESULT PAGE
+   ========================================= */
+
+/* Main Result Container */
+.result-container {
+    width: 75%;
+    margin: 40px auto;
+    text-align: center;
+    color: white; /* Default text color for result page */
+}
+
+/* Page Title (h1) */
+.result-container h1 {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.4); /* subtle depth */
+}
+
+
+
+/* "Resume Analysis" title specifically */
+.score-card h2 {
+    color: white !important;
+}
+
+/* Grey explanatory text in score-card */
+.score-card p[style="color: gray; font-size: 14px;"] {
+    color: #b0bec5 !important; /* Light grey instead of dark grey */
+}
+
+/* --- CARDS (The main sections) --- */
+.card {
+    background: #1a252f; /* Premium dark navy blue card background */
+    padding: 25px;
+    margin: 25px 0;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    border: 1px solid #34495e; /* Subtle border for definition */
+}
+
+/* Special Case for "Resume Analysis" Card text color */
+.result-container .score-card p {
+    color: white !important;
+}
+
+/* --- TABLE STYLING --- */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: #2c3e50; /* slightly lighter dark blue for table rows */
+    border-radius: 10px;
+    overflow: hidden; /* for corner rounding */
+    color: white; /* table cell text */
+}
+
+th {
+    /* Main Dark Teal gradient from home page buttons */
+    background: linear-gradient(to right, #2c5364, #203a43); 
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 15px;
+    border: 1px solid #34495e;
+}
+
+td {
+    padding: 12px;
+    border: 1px solid #34495e;
+    font-size: 14px;
+    color: white !important; /* Ensure job titles are white */
+}
+
+/* Perfect Job Match special table */
+.card[style*="border:2px solid #00c853"] th {
+    background: linear-gradient(to right, #00c853, #009624); /* keep green for th */
+}
+
+.card[style*="border:2px solid #00c853"] {
+    background: #1a252f; /* standard dark background */
+}
+
+.card[style*="border:2px solid #00c853"] td {
+    color: #a5d6a7 !important; /* light green for text */
+}
+
+/* --- LISTS (Missing Skills, Suggestions) --- */
+ul {
+    padding-left: 0;
+    margin-top: 15px;
+    text-align: left; /* lists read better left-aligned */
+}
+
+ul li {
+    background: #2c3e50; /* same as table rows */
+    color: white !important;
+    margin: 10px auto;
+    width: 90%;
+    padding: 12px;
+    border-radius: 8px;
+    list-style: none; /* remove default dots */
+    border-left: 4px solid #4facfe; /* blue accent */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Suggestion special list styling */
+.features ul li {
+    background: #2c3e50;
+    border-left: 4px solid #00d2ff; /* cyan accent for suggestion features */
+}
+
+/* --- Perfect Job Matches list specific styles --- */
+ul.perfect-jobs-list li {
+    border-left: 4px solid #00c853; /* green accent */
+}
+
+/* --- JD SCORE (Disabled in code, but here for style) --- */
+.jd-score {
+    font-size: 28px;
+    font-weight: bold;
+    color: #4facfe; /* Blue from home page gradient */
+    text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+}
+
+/* --- BUTTONS (Home page style) --- */
+.result-container .back-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    margin-top: 15px;
+    background: linear-gradient(to right, #2c5364, #203a43); /* home page blue button */
+    border: none;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.result-container .back-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #243b55, #141e30); /* dark hover blue */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Ensure icons/text in headers look correct */
+.result-container h1 span, .result-container h2 span {
+    vertical-align: middle;
+}
+
+/* Naye pages ke buttons aur animations ke liye */
+a.back-btn {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db; /* Blue color */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Naye Result Boxes ke liye Simple CSS */
+.feature-box {
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px); /* Mouse le jane par box thoda upar uthega */
+}
+
+.feature-box strong {
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.feature-box span {
+    display: block;
+    margin: 5px 0;
+}

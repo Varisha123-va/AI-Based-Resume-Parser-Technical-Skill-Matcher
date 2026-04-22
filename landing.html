@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Master</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .hero-section { text-align: center; padding: 100px 20px; background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; }
+        .cta-btn { padding: 15px 30px; background: #00c853; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.2rem; transition: 0.3s; }
+        .cta-btn:hover { background: #00e676; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <h1>🚀 AI Resume Scanner & Job Matcher</h1>
+        <p style="font-size: 1.2rem; margin-bottom: 40px;">Professional analysis to bridge the gap between your resume and dream job.</p>
+        <a href="/upload-page" class="cta-btn">Check My Resume Now</a>
+    </div>
+
+    <div class="container" style="margin-top: -50px;">
+        <div class="features" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+            <div class="feature-box"><h3>🔍 Smart Scan</h3><p>Extracts deep insights using NLP.</p></div>
+            <div class="feature-box"><h3>📈 Match Score</h3><p>Real-time scoring against jobs.</p></div>
+            <div class="feature-box"><h3>💡 Roadmap</h3><p>Step-by-step skill guidance.</p></div>
+        </div>
+    </div>
+</body>
+</html>

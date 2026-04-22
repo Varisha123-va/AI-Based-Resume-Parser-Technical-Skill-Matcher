@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Career Roadmap</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="result-container">
+        <h1>🛠 Career Roadmap: {{ field }}</h1>
+        
+        <div class="card">
+            <h2>1. Missing Skills Bridge</h2>
+<p>The following skills were not found in your resume. Please check the topics below to learn and improve them:</p>
+<ul>
+                {% for skill in skills %}
+                <li style="margin-bottom: 10px;">
+                    <strong>{{ skill.upper() }}</strong>: Search "FreeCodeCamp {{ skill }}" on YouTube.
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card" style="background: #f8fafc; border: 2px solid #e2e8f0; color: #1e293b;">
+            <h2 style="color: #2563eb;">2. Recommendation</h2>
+            <p style="font-size: 1.1rem; color: #334155;">
+    Next Step: Create a new project that includes these missing skills in <b>{{ field }}</b>.
+</p>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="/result" class="back-btn">⬅ Back to Score Card</a>
+        </div>
+    </div>
+</body>
+</html>

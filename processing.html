@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Analyzing...</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .scan-container { text-align: center; margin-top: 150px; }
+        .loader { border: 10px solid #f3f3f3; border-top: 10px solid #2196F3; border-radius: 50%; width: 80px; height: 80px; animation: spin 1s linear infinite; margin: auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #status-text { font-size: 1.5rem; color: #333; margin-top: 20px; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+    <div class="scan-container">
+        <div class="loader"></div>
+        <h2 id="status-text">Scanning PDF Structure...</h2>
+    </div>
+
+    <script>
+        const msgs = ["Extracting Text...", "Identifying Skills...", "Matching Jobs...", "Generating Report..."];
+        let i = 0;
+        setInterval(() => {
+            if(i < msgs.length) document.getElementById('status-text').innerText = msgs[i++];
+        }, 800);
+
+        setTimeout(() => {
+            window.location.href = "/result";
+        }, 3500); // 3.5 seconds wait
+    </script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body onload="setTimeout(function(){ window.scrollTo(0,0); }, 50);"></body>
+    <!-- HERO SECTION -->
+  <div class="hero">
+    <h1>🚀 AI Resume Analyzer</h1>
+    <p class="main-text">
+        Boost your career with AI-powered resume analysis
+    </p>
+    <p class="sub-text">
+        Get Resume Score • Skill Gap Analysis • Job Recommendations
+    </p>
+</div>
+
+<div class="container">
+    <h1>AI Resume Analyzer</h1>
+    <img src="{{ url_for('static', filename='job.png.jpeg') }}" class="banner">
+
+    <form id="resume-form" action="/analyze" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+    <div class="upload-row">
+
+    <!-- Upload Button -->
+    <label for="resume" class="custom-file-upload">
+        📄 Upload Resume
+    </label>
+
+    <!-- File Input -->
+    <input type="file" id="resume" name="resume" onchange="showFileName()">
+
+    
+
+    <!-- Delete Button (hidden initially) -->
+    <button type="button" onclick="deleteResume()" id="delete-btn" class="custom-file-upload delete-style">
+       🗑 Delete
+    </button>
+    </div>
+
+
+    <p id="file-name">
+    {% if session.get('file_name') %}
+    📄 {{ session.get('file_name') }}
+    {% else %}
+    No file selected
+    {% endif %}
+</p>
+
+    <p id="file-error" class="file-error">❌ Please upload a resume file!</p>
+
+        <textarea name="job_desc" placeholder="Paste Job Description (optional)"></textarea>
+
+        <button type="submit" id="btn">Analyze Resume</button>
+    </form>
+
+
+
+    <div class="about">
+    <h2>About The System</h2>
+    <p>
+        This AI Resume Analyzer uses Machine Learning techniques like TF-IDF and Cosine Similarity 
+        to analyze resumes and provide job recommendations, skill gap analysis, and improvement suggestions.
+    </p>
+    </div>
+
+    <div class="features" style="display: flex; flex-direction: column; align-items: center; margin-top: 25px; width: 100%;">
+        <h2 style="margin-bottom: 15px; color: #1e293b; font-size: 1.3rem;">Features</h2>
+        
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; max-width: 900px; margin: 0 auto;">
+            
+            <div class="feature-box" style="background: #334e5e; color: white; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 8px; font-size: 0.8rem; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <span>📄</span> Resume Analysis
+            </div>
+
+            <div class="feature-box" style="background: #334e5e; color: white; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 8px; font-size: 0.8rem; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <span>📊</span> Resume Score
+            </div>
+
+            <div class="feature-box" style="background: #334e5e; color: white; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 8px; font-size: 0.8rem; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <span>🧠</span> Skill Gap Detection
+            </div>
+
+            <div class="feature-box" style="background: #334e5e; color: white; padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 8px; font-size: 0.8rem; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <span>💼</span> Job Recommendations
+            </div>
+
+        </div>
+    </div>
+    
+
+{% if session.get('resume_uploaded') %}
+
+<div style="text-align:center; margin-top:20px;">
+
+    <a href="/result#top" class="back-btn">
+
+        ➡ Go to Result
+
+    </a>
+
+</div>
+
+{% endif %}
+
+<script>
+
+if (performance.getEntriesByType("navigation")[0].type === "reload") {
+    fetch('/delete', { method: 'POST' }).then(() => {
+        const input = document.getElementById('resume');
+        const fileNameText = document.getElementById('file-name');
+        const resultBtn = document.querySelector('.back-btn');
+
+        if(input) input.value = "";
+        if(fileNameText) fileNameText.innerText = "No file selected";
+        if(resultBtn) resultBtn.style.display = "none";
+    });
+}
+
+let fileUploaded = false;
+
+// browser ka auto scroll band
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+// page load hote hi force top
+window.onload = function () {
+    window.scrollTo(0, 0);
+    fileUploaded = false;
+};
+
+
+function deleteResume() {
+    fetch('/delete', { method: 'POST' })
+    .then(() => {
+        // 1. Input field ko khali karo
+        const input = document.getElementById('resume');
+        if(input) input.value = "";
+
+        // 2. File name text ko "No file selected" karo
+        const fileNameText = document.getElementById('file-name');
+        if(fileNameText) fileNameText.innerText = "No file selected";
+
+        // 3. Error messages ko chupao
+        const fileError = document.getElementById('file-error');
+        if(fileError) fileError.style.display = "none";
+
+        // 4. "Already uploaded" wala blue box agar dikh raha hai toh usey hide karo
+        const uploadedBox = document.querySelector('.already-uploaded-box');
+        if(uploadedBox) uploadedBox.style.display = "none";
+
+        // 5. "Go to Result" button ko hide karo
+        const resultBtn = document.querySelector('.back-btn');
+        if(resultBtn) resultBtn.style.display = "none";
+
+        // 6. Variable ko reset karo
+        fileUploaded = false;
+        
+        // Optional: Page ko reload kar sakti hain bilkul fresh look ke liye
+        // window.location.reload(); 
+    });
+}
+/*
+function showFileName() {
+    const input = document.getElementById('resume');
+    const fileNameText = document.getElementById('file-name');
+    const fileError = document.getElementById('file-error');
+
+    if (fileUploaded) {
+        fileError.innerText = "❌ Only one file allowed. Delete first!";
+        fileError.style.display = "block";
+
+        input.value = "";
+        return;
+    }
+
+    if (input.files.length > 0) {
+        fileNameText.innerText = input.files[0].name;
+        fileError.style.display = "none";
+
+        fileUploaded = true;
+    }
+}
+*/
+
+function showFileName() {
+    const input = document.getElementById('resume');
+    const fileNameText = document.getElementById('file-name');
+    const fileError = document.getElementById('file-error');
+
+    if (input.files.length > 0) {
+        fileNameText.innerText = input.files[0].name;
+        fileError.style.display = "none";
+        // fileUploaded = true; <-- Is line ko comment kar dein ya hata dein
+    }
+}
+
+if (performance.getEntriesByType("navigation")[0].type === "reload") {
+    fetch('/delete', { method: 'POST' }).then(() => {
+        window.location.href = "/"; // Sab saaf karke wapas home
+    });
+}
+
+
+function validateForm() {
+    const input = document.getElementById('resume');
+    const fileError = document.getElementById('file-error');
+    const fileNameElement = document.getElementById('file-name');
+    const existingFileName = fileNameElement.innerText.trim();
+    const isFileAlreadyInSession = existingFileName !== "" && existingFileName !== "No file selected";
+
+    
+    if (input.files.length === 0 && !isFileAlreadyInSession) {
+        fileError.innerText = "❌ Please upload a resume first!";
+        fileError.style.display = "block";
+        return false;
+    }
+
+    fileError.style.display = "none";
+    return true; 
+}
+
+
+document.getElementById('resume-form').addEventListener('submit', function(e){
+    const fileInput = document.getElementById('resume');
+    const fileError = document.getElementById('file-error');
+    const fileNameElement = document.getElementById('file-name');
+    
+    // Check karo kya session wali file dikh rahi hai
+    const currentText = fileNameElement.innerText.trim();
+    const isFileInSession = currentText !== "" && !currentText.includes("No file selected");
+
+    fileError.style.display = "none";
+
+    // AGAR input khali hai AUR session mein bhi file nahi hai, TABHI roko
+    if(fileInput.files.length === 0 && !isFileInSession){
+        e.preventDefault();
+        fileError.innerText = "❌ Please upload a file first!";
+        fileError.style.display = "block";
+    }
+});
+
+</script>
+
+
+
+
+</body>
+</html>                                                                                                                                                            
+

@@ -1,0 +1,153 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>Result</title> 
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+    </head> 
+    <body>
+        <div id="top"></div>
+
+        <div class="result-container"> 
+            <h1>📊 Resume Analysis Dashboard</h1> 
+
+            {% if not score %} 
+            <p style="text-align:center; color:red;"> 
+                No data found. Please analyze resume first. 
+            </p> 
+            {% endif %}
+        
+            <!-- SCORE CARD --> 
+            <div class="card score-card"> 
+                <h2>Resume Analysis</h2>
+
+            <p style="text-align:center; font-weight:bold;"> 
+                Resume processed successfully ✅ 
+            </p>
+
+            <p style="color: gray; font-size: 14px;"> 
+                This shows how well your resume matches job roles. 
+            </p> 
+        </div>
+
+        {% if perfect_jobs %}
+        <div class="card" style="border:2px solid #00c853; background:#e8f5e9;">
+          <h2>🏆 Perfect Job Match (100%)</h2>
+
+        <table>
+        <tr>
+            <th>Job Title</th>
+            <th>Match %</th>
+        </tr>
+
+        {% for job in perfect_jobs %}
+        <tr>
+            <td>{{ job.job_title }}</td>
+            <td>{{ "%.2f"|format(job["Match Percentage"]) }}%</td>
+        </tr>
+        {% endfor %}
+        </table>
+
+        </div>
+        {% endif %}
+
+        <!-- JOB MATCHES --> 
+    <div class="card"> 
+        <h2>💼 Top Job Matches</h2> 
+        <table> 
+        <tr> 
+            <th>Job Title</th> 
+            <th>Match %</th> 
+        </tr> 
+        {% for row in tables %} 
+        <tr> 
+            <td>{{ row.job_title }}</td> 
+            <td>{{ "%.2f"|format(row["Match Percentage"]) }}%</td> 
+        </tr> 
+        {% endfor %} 
+        </table> 
+    </div>
+        
+        <!-- SKILLS --> 
+         <div class="card"> 
+            <h2>❗ Missing Skills</h2> 
+            <ul> 
+                {% for skill in missing_skills %} 
+                <li>{{ skill }}</li> 
+                {% endfor %} 
+            </ul> 
+        </div> 
+        
+        <!-- JD SCORE --> 
+        <!----
+        <div class="card"> 
+            <h2>📈 JD Match Score</h2> 
+            <p class="jd-score">
+                {{ jd_score }}%
+            </p> </div> 
+        -->
+
+        <!-- SUGGESTIONS --> 
+         <div class="card"> 
+            <h2>💡 Suggestions</h2> 
+            <ul> 
+                {% for s in suggestions %} 
+                <li>{{ s }}</li> 
+                {% endfor %} 
+            </ul> 
+        </div> 
+        
+        <div style="text-align:center; margin-top:20px;"> 
+            <a href="/download"> 
+                <button class="back-btn">📥 Download Full Report</button> 
+            </a> 
+        </div> 
+
+        <a href="/roadmap">
+        <button class="back-btn" style="background: #ff9800;">🚀 View Career Roadmap</button>
+        </a>
+
+        <a href="/" class="back-btn" onclick="goHome()">
+           ⬅ Back to Home
+        </a>
+
+    </div>
+
+    <div class="card" style="margin-top: 20px; border-top: 5px solid #0d47a1; background: #fdfdfd;">
+    <h2 style="text-align: center; color: #333;">🧠 AI Deep Scan Analysis</h2>
+    
+    <div class="features" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 15px;">
+        
+        <div class="feature-box" style="background: #e3f2fd; color: #0d47a1; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #bbdefb;">
+            <strong style="font-size: 14px;">Technical Skills</strong><br>
+            <span style="font-size: 18px; font-weight: bold;">
+                {% if breakdown.tech >= 5 %} High 💪 {% else %} Average 👍 {% endif %}
+            </span><br>
+            <small style="font-size: 12px;">{{ breakdown.tech }} Skills Found</small>
+        </div>
+
+        <div class="feature-box" style="background: #e8f5e9; color: #1b5e20; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #c8e6c9;">
+            <strong style="font-size: 14px;">Project Evidence</strong><br>
+            <span style="font-size: 18px; font-weight: bold;">
+                {% if breakdown.project_impl >= 10 %} Verified ✅ {% else %} Basic 💡 {% endif %}
+            </span><br>
+            <small style="font-size: 12px;">Practical Proof</small>
+        </div>
+
+        <div class="feature-box" style="background: #fff3e0; color: #e65100; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #ffe0b2;">
+            <strong style="font-size: 14px;">Exp. Relevance</strong><br>
+            <span style="font-size: 18px; font-weight: bold;">
+                {% if breakdown.exp_match > 0 %} Relevant 💼 {% else %} Fresher 🎓 {% endif %}
+            </span><br>
+            <small style="font-size: 12px;">Career Level</small>
+        </div>
+
+    </div>
+
+    <p style="margin-top: 15px; font-style: italic; color: #666; text-align: center; font-size: 13px;">
+        "Note: Project Evidence <b>'Verified'</b> tabhi hota hai jab aapki skills aapke projects ke sath match hoti hain."
+    </p>
+    </div>
+    </div>
+
+    
+    </body>

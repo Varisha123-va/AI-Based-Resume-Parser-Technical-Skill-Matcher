@@ -1,0 +1,5 @@
+pandas
+pdfplumber
+scikit-learn
+reportlab
+gunicorn
